@@ -5,11 +5,11 @@ import {
   Keyboard,
   StyleSheet,
   TouchableOpacity,
-  ActivityIndicator,
   TouchableWithoutFeedback,
 } from 'react-native';
 import firebase from 'firebase';
 import Logo from '../components/Logo';
+import AnimatedLoader from 'react-native-animated-loader';
 
 import InputField from '../components/Forms/Components/InputField';
 
@@ -89,7 +89,13 @@ export class LoginScreen extends Component {
               />
               <TouchableOpacity style={styles.button} onPress={this.handleLogin}>
                 {loading ? (
-                  <ActivityIndicator color="#FFF" />
+                  <AnimatedLoader
+                    visible={true}
+                    overlayColor="rgba(255,255,255,0.75)"
+                    source={require('../assets/loader.json')}
+                    animationStyle={styles.lottie}
+                    speed={1}
+                  />
                 ) : (
                   <Text style={{ fontFamily: 'MaisonBold', fontSize: 16, color: '#7540EE' }}>
                     Login
@@ -135,5 +141,10 @@ const styles = StyleSheet.create({
     borderColor: '#7540EE20',
     borderRadius: 30,
     borderWidth: 1,
+  },
+
+  lottie: {
+    width: 100,
+    height: 300,
   },
 });
