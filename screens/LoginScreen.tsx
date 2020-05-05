@@ -20,7 +20,7 @@ interface InputProps {
   loading: boolean;
 }
 
-export class LoginScreen extends React.Component<{}, InputProps> {
+export class LoginScreen extends React.Component<{ navigation: any }, InputProps> {
   constructor(props) {
     super(props);
     this.state = {
