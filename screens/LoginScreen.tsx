@@ -13,7 +13,14 @@ import AnimatedLoader from 'react-native-animated-loader';
 
 import InputField from '../components/Forms/Components/InputField';
 
-export class LoginScreen extends Component {
+interface InputProps {
+  password: string;
+  email: string;
+  error: string;
+  loading: boolean;
+}
+
+export class LoginScreen extends React.Component<{}, InputProps> {
   constructor(props) {
     super(props);
     this.state = {
