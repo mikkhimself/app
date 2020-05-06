@@ -34,6 +34,7 @@ export class LoginScreen extends React.Component<{ navigation: any }, InputProps
   handleLogin = () => {
     const { password, email } = this.state;
     const { navigation } = this.props;
+    console.log('click!');
     this.setState({ error: '', loading: true });
     firebase
       .auth()
@@ -47,102 +48,95 @@ export class LoginScreen extends React.Component<{ navigation: any }, InputProps
     const { navigation } = this.props;
 
     return (
-      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-        <View style={styles.container}>
-          <Logo style={{ alignSelf: 'flex-start', bottom: '20%', right: '2%' }} />
-          <View style={{ bottom: '10%', alignSelf: 'flex-start' }}>
-            <Text
-              style={{
-                fontFamily: 'MaisonBold',
-                fontSize: 24,
-                color: '#25265E',
-              }}
-            >
-              Hello!
-            </Text>
-            <View
-              style={{
-                top: '10%',
-                alignSelf: 'flex-start',
-              }}
-            >
-              <Text style={{ fontFamily: 'MaisonMedium', fontSize: 16, color: '#787993' }}>
-                Glad to have you onboard! Log in
-              </Text>
-              <Text
-                style={{
-                  top: '60%',
-                  fontFamily: 'MaisonMedium',
-                  fontSize: 16,
-                  color: '#787993',
-                }}
-              >
-                to start using the app
-              </Text>
-            </View>
-            <View style={{ justifyContent: 'center', top: '25%' }}>
-              <InputField
-                placeholderTextColor="#787993"
-                placeholder="Email address"
-                value={this.state.email}
-                onChangeText={(email) => this.setState({ email })}
-              />
-              <InputField
-                placeholderTextColor="#787993"
-                placeholder="Password"
-                value={password}
-                secureTextEntry
-                onChangeText={(input) => this.setState({ password: input })}
-              />
-              <TouchableOpacity style={styles.button} onPress={this.handleLogin}>
-                {loading ? (
-                  <AnimatedLoader
-                    visible={true}
-                    overlayColor="rgba(255,255,255,0.75)"
-                    source={require('../assets/loader.json')}
-                    animationStyle={styles.lottie}
-                    speed={1}
-                  />
-                ) : (
-                  <Text style={{ fontFamily: 'MaisonBold', fontSize: 16, color: '#7540EE' }}>
-                    Login
-                  </Text>
-                )}
-              </TouchableOpacity>
-              <Text
-                style={{
-                  bottom: '15%',
-                  left: '15%',
-                  alignSelf: 'flex-end',
-                  fontFamily: 'MaisonMedium',
-                  color: '#7540EE',
-                }}
-              >
-                Forgot password?
-              </Text>
-            </View>
-          </View>
-
+      <>
+        <View style={styles.logo}>
+          <Logo />
           <Text style={{ color: 'red', textAlign: 'center' }}>{error}</Text>
         </View>
-      </TouchableWithoutFeedback>
+        <View style={styles.container}>
+          <Text style={{ fontFamily: 'SF-Bold', fontSize: 24, color: '#25265E', padding: 20 }}>
+            Hello!
+          </Text>
+          <Text
+            style={{
+              bottom: '15%',
+              fontFamily: 'SF-Medium',
+              fontSize: 16,
+              color: '#787993',
+              padding: 20,
+            }}
+          >
+            Glad to have you onbroad! Log in {'\n'} to start using the app.
+          </Text>
+        </View>
+        <View style={{ left: '10%', top: '3%' }}>
+          <InputField
+            style={{ fontFamily: 'MaisonMedium' }}
+            placeholderTextColor="#787993"
+            placeholder="Email address"
+            value={this.state.email}
+            onChangeText={(email) => this.setState({ email })}
+          />
+          <InputField
+            placeholderTextColor="#787993"
+            placeholder="Password"
+            value={password}
+            secureTextEntry
+            onChangeText={(input) => this.setState({ password: input })}
+          />
+        </View>
+        <View style={{ alignItems: 'flex-start', top: '5%', left: '7%' }}>
+          <TouchableOpacity style={styles.button} onPress={this.handleLogin}>
+            {loading ? (
+              <AnimatedLoader
+                visible={true}
+                overlayColor="rgba(255,255,255,0.75)"
+                source={require('../assets/loader.json')}
+                animationStyle={styles.lottie}
+                speed={1}
+              />
+            ) : (
+              <Text style={{ fontFamily: 'SF-Bold', fontSize: 16, color: '#7540EE' }}>Login</Text>
+            )}
+          </TouchableOpacity>
+        </View>
+        <View style={{ alignItems: 'flex-end', bottom: '1%', right: '10%' }}>
+          <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
+            <Text style={{ color: '#7540EE', fontSize: 16, fontFamily: 'SF-Medium' }}>
+              Forgot password?
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <View style={{ alignSelf: 'center', top: '8%' }}>
+          <Text style={{ fontFamily: 'SF-Medium', color: '#787993', fontSize: 16 }}>
+            Still without account?
+            <Text style={{ fontFamily: 'SF-Medium', color: '#FF7052', fontSize: 16 }}>
+              {''} Create one
+            </Text>
+          </Text>
+        </View>
+      </>
     );
   }
 }
 export default LoginScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+  logo: {
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
     margin: 40,
+    top: '10%',
+  },
+  container: {
+    alignItems: 'flex-start',
+    padding: 20,
+    top: '6%',
   },
   button: {
     margin: 10,
-    paddingHorizontal: 30,
     paddingVertical: 12,
-    width: '40%',
+    width: '26%',
     alignItems: 'center',
     backgroundColor: '#7540EE20',
     borderColor: '#7540EE20',

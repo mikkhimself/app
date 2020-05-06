@@ -54,7 +54,10 @@ export default class App extends Component<Props> {
       Font.loadAsync({
         MaisonBold: require('./assets/fonts/Maison-Neue-Bold.ttf'),
         'SF-display': require('./assets/fonts/SFProDisplay-Regular.ttf'),
+        'SF-Bold': require('./assets/fonts/SFProDisplay-Bold.ttf'),
+        'SF-Medium': require('./assets/fonts/SFProDisplay-Medium.ttf'),
         MaisonMedium: require('./assets/fonts/MaisonNeue-Medium.ttf'),
+        MaisonDemi: require('./assets/fonts/MaisonNeue-Demi.ttf'),
       }),
     ]);
   };
